@@ -4,7 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
 
 function NavBar() {
-  const { isAuth } = useContext(AuthContext);
+  const { isAuth, logout } = useContext(AuthContext);
   const history = useHistory();
 
   return (
@@ -18,20 +18,26 @@ function NavBar() {
           </span>
         </Link>
 
-      <div>
-        {!isAuth ? <button
-          type="button"
-          onClick={() => history.push('/signin')}
-        >
-          Log in
-        </button> : ""}
-          {!isAuth ? <button
-          type="button"
-          onClick={() => history.push('/signup')}
-        >
-          Registreren
-        </button>  : ""}
-      </div>
+        <div>
+            {!isAuth ? <button
+                type="button"
+                onClick={() => history.push('/signin')}
+            >
+                Log in
+            </button> : ""}
+            {!isAuth ? <button
+                type="button"
+                onClick={() => history.push('/signup')}
+            >
+                Registreren
+            </button> : ""}
+            {isAuth ? <button
+                type="button"
+                onClick={logout}
+            >
+                Uitloggen
+            </button> : ""}
+        </div>
     </nav>
   );
 }
