@@ -5,6 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 function SignIn() {
     const { login } = useContext(AuthContext);
 
+    // deze functie werkt niet, de preventDefault geeft volgens mij een foutmelding. Daarom heb ik gewoon direct de login op de onSubmit gezet.
     // function handleSubmit(e) {
     //     e.preventDefault();
     //     login();

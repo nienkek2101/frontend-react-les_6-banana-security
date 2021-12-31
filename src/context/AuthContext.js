@@ -37,6 +37,4 @@ function AuthContextProvider({ children }) {
 
 }
 
-
-
 export default AuthContextProvider;
