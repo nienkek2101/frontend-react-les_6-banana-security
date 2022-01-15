@@ -4,25 +4,43 @@ import { useHistory } from "react-router-dom";
 export const AuthContext = createContext(null);
 
 function AuthContextProvider({ children }) {
-    const [ isAuth, toggleIsAuth ] = useState(false);
+    const [ auth, toggleAuth ] = useState({
+        isAuth: false,
+        user: null,
+    });
     const history = useHistory();
 
     function login(e) {
         e.preventDefault();
-        toggleIsAuth(true);
+        toggleAuth({
+            ...auth,
+            user: {
+                email: "n.kapers@gmail.com",
+                id: 5,
+            },
+            isAuth: true,
+        });
         console.log('Gebruiker is ingelogd');
+        // console.log(auth.user.email);
         history.push('/profile')
     }
 
     function logout(e) {
         e.preventDefault();
-        toggleIsAuth(false);
+        toggleAuth({
+            ...auth,
+            // user: {
+            //     email:
+            //     id:
+            // }
+            isAuth: false,
+        });
         console.log('Gebruiker is uitgelogd');
         history.push('/');
     }
 
     const data = {
-        isAuth: isAuth,
+        auth: auth,
         login: login,
         logout: logout,
     }

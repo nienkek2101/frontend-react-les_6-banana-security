@@ -9,7 +9,10 @@ import './App.css';
 import { AuthContext } from "./context/AuthContext";
 
 function App() {
-  const { isAuth } = useContext(AuthContext);
+  // const alles = useContext(AuthContext);
+  // console.log(alles);
+  const { auth: { isAuth } } = useContext(AuthContext);
+  // console.log(isAuth.user.email);
   return (
     <>
       <NavBar />
