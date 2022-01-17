@@ -1,14 +1,34 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 function SignUp() {
-    const [ userData, setData ] = useState({
-        userName: '',
-        email: '',
-        password: '',
-    })
-    function handleSubmit(e) {
+    // dit eerste geprobeerd met userData.username
+    // const [ userData, setData ] = useState({
+    //     username: '',
+    //     email: '',
+    //     password: '',
+    // })
+
+    const [ username, setUsername ] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
+
+    async function handleSubmit(e) {
         e.preventDefault();
+        console.log(username, email, password);
+        try {
+            const result = await axios.post('http://localhost:3000/register', {
+                username: username,
+                email: email,
+                password: password,
+            })
+            console.log(result);
+
+        } catch(e) {
+            console.error(e);
+            console.log(e.response);
+        }
 
     }
   return (
@@ -22,32 +42,33 @@ function SignUp() {
             <label htmlFor="user-name">Gebruikersnaam
                 <input
                     type="text"
-                    id="user-name"
-                    name="user-name"
-                    value={userData.userName}
-                    onChange={(e) => setData(e.target.value)}
+                    id="username"
+                    name="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
             </label>
             <label htmlFor="email-adress">E-mailadres
                 <input
-                    type="text"
-                    id="email-adress"
-                    name="email-adress"
-                    value={userData.email}
-                    onChange={(e) => setData(e.target.value)}
+                    type="email"
+                    id="email-field"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
             </label>
             <label htmlFor="password">Wachtwoord
                 <input
-                    type="text"
+                    type="password"
                     id="password"
                     name="password"
-                    value={userData.password}
-                    onChange={(e) => setData(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
             </label>
-            <button type="submit">
-                Versturen
+            <button
+                type="submit">
+                Registeren
             </button>
         </p>
       </form>
