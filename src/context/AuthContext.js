@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
 import axios from "axios";
@@ -9,7 +9,9 @@ function AuthContextProvider({ children }) {
     const [ auth, toggleAuth ] = useState({
         isAuth: false,
         user: null,
+        status: 'pending',
     });
+
     const history = useHistory();
 
     // Ik verwacht een jwtToken als ik aangeroepen wordt.
@@ -28,7 +30,9 @@ function AuthContextProvider({ children }) {
         // als je nog niet voldoende informatie hebt nu, zul je HIER
         // nog een asynchrone functie moeten schrijven met een GET-request om meer gegevens op te halen
 
-        getUserData(decodedToken.sub, jwtToken);
+        useEffect(() => {
+            getUserData(decodedToken.sub, jwtToken);
+        }, []);
 
         console.log('Gebruiker is ingelogd');
         // console.log(auth.user.email);
@@ -54,7 +58,9 @@ function AuthContextProvider({ children }) {
                     email: result.data.email,
                     username: result.data.username,
                     id: result.data.id,
+
                 },
+                status: 'done',
                 isAuth: true,
             });
             // console.log(auth.user.id);
@@ -74,6 +80,7 @@ function AuthContextProvider({ children }) {
             ...auth,
             user: null,
             isAuth: false,
+            status: 'done',
         });
         console.log('Gebruiker is uitgelogd');
         history.push('/');
@@ -91,7 +98,9 @@ function AuthContextProvider({ children }) {
     return (
         <AuthContext.Provider
             value={data}>
-            {children}
+            {auth.status === 'pending'
+                ? <p>Loading...</p>
+                : children}
         </AuthContext.Provider>
     );
 
