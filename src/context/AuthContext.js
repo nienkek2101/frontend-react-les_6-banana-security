@@ -14,6 +14,25 @@ function AuthContextProvider({ children }) {
 
     const history = useHistory();
 
+    useEffect(() => {
+        console.log('banaan');
+        // const token = localStorage.getItem('token');
+        // console.log(token);
+        // const decodedToken = jwt_decode(token);
+        // console.log('Decoded token:', decodedToken);
+        // if (token !== null) {
+        //     getUserData(decodedToken.sub, token);
+        // } else {
+        //     toggleAuth({
+        //         ...auth,
+        //         user: null,
+        //         isAuth: false,
+        //         status: 'done',
+        //     });
+        // }
+
+    }, []);
+
     // Ik verwacht een jwtToken als ik aangeroepen wordt.
     function login(jwtToken) {
         console.log('De context heeft de token ontvangen', jwtToken)
@@ -30,9 +49,7 @@ function AuthContextProvider({ children }) {
         // als je nog niet voldoende informatie hebt nu, zul je HIER
         // nog een asynchrone functie moeten schrijven met een GET-request om meer gegevens op te halen
 
-        useEffect(() => {
-            getUserData(decodedToken.sub, jwtToken);
-        }, []);
+        getUserData(decodedToken.sub, jwtToken);
 
         console.log('Gebruiker is ingelogd');
         // console.log(auth.user.email);
