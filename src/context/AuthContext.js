@@ -15,27 +15,30 @@ function AuthContextProvider({ children }) {
     const history = useHistory();
 
     useEffect(() => {
-        console.log('banaan');
-        // const token = localStorage.getItem('token');
-        // console.log(token);
-        // const decodedToken = jwt_decode(token);
-        // console.log('Decoded token:', decodedToken);
-        // if (token !== null) {
-        //     getUserData(decodedToken.sub, token);
-        // } else {
-        //     toggleAuth({
-        //         ...auth,
-        //         user: null,
-        //         isAuth: false,
-        //         status: 'done',
-        //     });
-        // }
+        console.log('Context wordt gerefresht!');
+        const token = localStorage.getItem('token');
+        console.log(token);
+
+        // ik had eerst if (token !== null), daarop liep hij vast
+        if (token) {
+            const decodedToken = jwt_decode(token);
+            console.log('Decoded token:', decodedToken);
+            getUserData(decodedToken.sub, token);
+        } else {
+            toggleAuth({
+                ...auth,
+                user: null,
+                isAuth: false,
+                status: 'done',
+            });
+        }
+        console.log(auth.status);
 
     }, []);
 
     // Ik verwacht een jwtToken als ik aangeroepen wordt.
     function login(jwtToken) {
-        console.log('De context heeft de token ontvangen', jwtToken)
+        console.log('De context heeft de token ontvangen', jwtToken);
 
         // token in de localStorage plaatsen
         localStorage.setItem('token', jwtToken);

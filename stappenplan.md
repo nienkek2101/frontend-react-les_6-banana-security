@@ -1,7 +1,7 @@
 Stappenplan mét token-validatie
 
 // STAPPENPLAN PERSIST ON REFRESH
-// - [ ] Check of er een token in de local storage staat
+// - [X] Check of er een token in de local storage staat
 // - [ ] BONUS: Schrijf een functie die checkt of de token nog geldig is:
 //    - [ ] Decode de token en haal daar de expiratiedatum (UNIX timestamp) uit
 //    - [ ] Maak een "nu" punt in JavaScript
@@ -15,14 +15,14 @@ Stappenplan mét token-validatie
 // - [ ] Puntjes op de i: onze functie is een helperfunctie, dus die mag naar een apart mapje!
 
 // STAPPENPLAN PERSIST ON REFRESH (9)
-// - [ ] Voeg een 'status'-key toe aan de Context-state
-// - [ ] Implementeer een mounting-effect in de context
+// - [X] Voeg een 'status'-key toe aan de Context-state
+// - [X] Implementeer een mounting-effect in de context
 // - [ ] Zorg ervoor dat er "Context wordt gerefresht"! wordt gelogd in de console wanneer je de applicatie ververst.
 // - In dit mounting-effect doe je de volgende dingen:
-//      [ ] Check of er een JWT in de Local Storage aanwezig is
-//      [ ] Als dat zo is, decodeer je de token. We namelijk hebben de id van de gebruiker nodig!
-//      [ ] Gebruik deze id en de versleutelde token om een GET-request te doen naar het gebruikersgegevens-endpoint.
-//      [ ] Als dit succesvol is, gebruik je de response om de gebruikersgegevens in de Context-state te plaatsen. Bovendien zet je isAuth op true en de status op done.
+//      [X] Check of er een JWT in de Local Storage aanwezig is
+//      [X] Als dat zo is, decodeer je de token. We namelijk hebben de id van de gebruiker nodig!
+//      [X] Gebruik deze id en de versleutelde token om een GET-request te doen naar het gebruikersgegevens-endpoint.
+//      [X] Als dit succesvol is, gebruik je de response om de gebruikersgegevens in de Context-state te plaatsen. Bovendien zet je isAuth op true en de status op done.
 //      [ ] Als dit niet succesvol is of er is geen token aanwezig, zet je de de user op null, isAuth op false en status op done
 // - [ ] Zet een ternary operator in de return-statement van de Context. Render alleen de children wanneer de status op done staat, anders renderen we <p>Loading...</p>;
 // - [ ] Schrijf een functie die checkt of de token geldig is en voeg deze toe aan jouw if-statement! (zie ander stappenplan)
